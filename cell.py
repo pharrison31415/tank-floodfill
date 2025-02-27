@@ -30,7 +30,7 @@ class Steel(Cell):
         return "#"
 
 
-class Base(Cell):
+class Center(Cell):
     def __init__(self, row, col, health=1):
         super().__init__(row, col)
         self.health = health

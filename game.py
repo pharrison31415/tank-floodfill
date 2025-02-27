@@ -1,5 +1,5 @@
 import random
-from cell import Agent, Base, Brick, Empty, Steel
+from cell import Agent, Brick, Center, Empty, Steel
 
 
 class Game:
@@ -23,7 +23,7 @@ class Game:
             # try again if row and col match that of agent
             if not (base_r == agent.row and base_c == agent.col):
                 break
-        self.base = Base(base_r, base_c)
+        self.base = Center(base_r, base_c)
         self.grid[base_r][base_c] = self.base
 
     def fill_base_cost(self):
@@ -35,7 +35,7 @@ class Game:
             neighbors = list(self.neighborhood(source_r, source_c).values())
             neighbors.sort(key=lambda n: n.cost)
             for n in neighbors:
-                if not (isinstance(n, Empty) or isinstance(n, Base) or isinstance(n, Agent)):
+                if not (isinstance(n, Empty) or isinstance(n, Center) or isinstance(n, Agent)):
                     continue
                 r, c = n.row, n.col
                 if self.grid[r][c].cost != -1:
@@ -46,7 +46,7 @@ class Game:
     def get_next_agent_move(self):
         neighbors = self.neighborhood(self.agent.row, self.agent.col)
         empty_neighbors = {k: v for k, v in neighbors.items(
-        ) if isinstance(v, Empty) or isinstance(v, Base)}
+        ) if isinstance(v, Empty) or isinstance(v, Center)}
         if not empty_neighbors:
             print("No empty neighbors! :(")
             return "X"
