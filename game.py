@@ -74,13 +74,14 @@ class Game:
 
     def __repr__(self):
         s = ""
-        s += "+" + "-"*self.rows + "+\n"
+        s += "+" + "-"*(2*self.rows-1) + "+\n"
         for row in self.grid:
             s += "|"
             for cell in row:
-                s += str(cell)
+                s += str(cell) + " "
+            s = s[:-1]
             s += "|\n"
-        s += "+" + "-"*self.rows + "+"
+        s += "+" + "-"*(2*self.rows-1) + "+"
         return s
 
     def show_grid(self):
@@ -88,7 +89,7 @@ class Game:
 
     def cost_string(self):
         s = ""
-        s += "+" + "-"*self.rows + "+\n"
+        s += "+" + "-"*(2*self.rows-1) + "+\n"
         for row in self.grid:
             s += "|"
             for cell in row:
@@ -98,8 +99,10 @@ class Game:
                     s += str(cell.cost)
                 else:
                     s += "#"
+                s += " "
+            s = s[:-1]
             s += "|\n"
-        s += "+" + "-"*self.rows + "+"
+        s += "+" + "-"*(2*self.rows-1) + "+"
         return s
 
     def show_cost(self):
